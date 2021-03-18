@@ -1,37 +1,62 @@
 import java.util.*;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class AddressBook {
     public int indexValue = 1;
     public HashMap<Integer,Contact> contacts = new HashMap<>();
     public static Scanner sc = new Scanner(System.in);
+    static AddressBook addressbook = new AddressBook();
 
     public void addContact(){
-        System.out.println("Enter First Name");
-        String first = sc.next();
-        sc.nextLine();
-        System.out.println("Enter Last Name");
-        String last = sc.next();
-        sc.nextLine();
-        System.out.println("Enter Address");
-        String address = sc.next();
-        sc.nextLine();
-        System.out.println("Enter City");
-        String city = sc.nextLine();
-        System.out.println("Enter State");
-        String state = sc.next();
-        sc.nextLine();
-        System.out.println("Enter Zip Code");
-        int zip = sc.nextInt();
-        System.out.println("Enter Phone Number");
-        long phone = sc.nextLong();
-        System.out.println("Enter E-mail");
-        String email = sc.next();
-        Contact contact = new Contact(first, last, address, city, state, zip, phone, email);
-        contacts.put(indexValue, contact);
-        indexValue++;
+        System.out.println("Enter Number of person you want to add");
+        int numOfPerson = sc.nextInt();
+        for (int add = 1; add <= numOfPerson; add++) {
+            System.out.println("\nPerson : " + add + " Enter First Name");
+            String first = sc.next();
+            sc.nextLine();
+            System.out.println("Person : " + add +" Enter Last Name");
+            String last = sc.next();
+            sc.nextLine();
+            System.out.println("Person : " + add +" Enter Address");
+            String address = sc.next();
+            sc.nextLine();
+            System.out.println("Person : " + add +" Enter City");
+            String city = sc.nextLine();
+            System.out.println("Person : " + add +" Enter State");
+            String state = sc.next();
+            sc.nextLine();
+            System.out.println("Person : " + add +" Enter Zip Code");
+            int zip = sc.nextInt();
+            System.out.println("Person : " + add +" Enter Phone Number");
+            long phone = sc.nextLong();
+            System.out.println("Person : " + add +" Enter E-mail");
+            String email = sc.next();
+            if (addressbook.check(first)) {
+                add--;
+                continue;
+            }
+            Contact contact = new Contact(first, last, address, city, state, zip, phone, email);
+            contacts.put(indexValue, contact);
+            indexValue++;
+        }
         System.out.println("Contact added Successfully");
+    }
+
+    public Boolean check(String checkName) {
+        if (contacts.isEmpty())
+            return false;
+        else {
+            System.out.println("\nAdd contact again with different first name.");
+            Iterator<Integer> itr = contacts.keySet().iterator();
+            while (itr.hasNext()) {
+                int key = itr.next();
+                if (contacts.get(key).firstName.equals(checkName)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public void deleteContact() {
