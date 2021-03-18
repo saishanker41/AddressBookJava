@@ -1,21 +1,27 @@
+import java.util.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class AddressBook {
-    public ArrayList<Contact> contacts = new ArrayList<>();
+    public int indexValue = 1;
+    public HashMap<Integer,Contact> contacts = new HashMap<>();
+    public static Scanner sc = new Scanner(System.in);
 
     public void addContact(){
-        Scanner sc = new Scanner(System.in);
         System.out.println("Enter First Name");
-        String first = sc.nextLine();
+        String first = sc.next();
+        sc.nextLine();
         System.out.println("Enter Last Name");
-        String last = sc.nextLine();
+        String last = sc.next();
+        sc.nextLine();
         System.out.println("Enter Address");
-        String address = sc.nextLine();
+        String address = sc.next();
+        sc.nextLine();
         System.out.println("Enter City");
         String city = sc.nextLine();
         System.out.println("Enter State");
-        String state = sc.nextLine();
+        String state = sc.next();
+        sc.nextLine();
         System.out.println("Enter Zip Code");
         int zip = sc.nextInt();
         System.out.println("Enter Phone Number");
@@ -23,12 +29,13 @@ public class AddressBook {
         System.out.println("Enter E-mail");
         String email = sc.next();
         Contact contact = new Contact(first, last, address, city, state, zip, phone, email);
-        contacts.add(contact);
+        contacts.put(indexValue, contact);
+        indexValue++;
         System.out.println("Contact added Successfully");
     }
 
     public void deleteContact() {
-        Scanner sc = new Scanner(System.in);
+
         if (contacts.isEmpty()) {
             System.out.println("Contact list is empty.");
         } else {
@@ -47,7 +54,7 @@ public class AddressBook {
 
     public static void main (String [] args) {
         System.out.println("-----Welcome to Address Book Program-----");
-        Scanner sc = new Scanner(System.in);
+
         int choice = 1;
         AddressBook addressbook = new AddressBook();
         do {
@@ -66,7 +73,7 @@ public class AddressBook {
                     break;
             }
         }
-        while(choice != 0);
-    }
+            while(choice != 0);
+        }
 
-}
+    }
